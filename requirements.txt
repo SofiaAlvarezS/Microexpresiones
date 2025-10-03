@@ -1,0 +1,27 @@
+# requirements.txt — dependencias principales (probadas con Python 3.10/3.11)
+opencv-contrib-python==4.7.0.72
+mediapipe==0.10.7
+numpy==1.24.3
+pandas==1.5.3
+scikit-learn==1.2.2
+joblib==1.2.0
+tqdm==4.65.0
+pyyaml==6.0
+Pillow==9.4.0
+matplotlib==3.7.1
+
+# Opcionales (descomentar si las vas a usar)
+# para servir modelo vía API (FastAPI + Uvicorn)
+# fastapi==0.95.2
+# uvicorn==0.22.0
+
+# para exportar/ejecutar modelos ONNX
+# onnx==1.14.1
+# onnxruntime==1.15.1
+# skl2onnx==1.14.0
+
+# si planeas experimentar con redes en PyTorch (opcional, pesado)
+# torch==2.1.0
+
+# utilidades (opcional)
+# ffmpeg-python==0.2.0   # manejar/convertir videos desde Python

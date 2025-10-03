@@ -1,0 +1,65 @@
+# config.yaml - configuración unificada para el pipeline
+dataset:
+  # lista de carpetas raíz donde están tus datasets (SAMM, CASME_II, etc.)
+  raw_paths:
+    - data_raw/SAMM_v1
+    - data_raw/CASME2
+  # carpeta donde se guardarán los ROIs procesados
+  rois_path: rois
+  # tamaño final (W, H) para los ROIs que alimentan features/modelo
+  roi_size: [128, 128]
+  # archivos de anotaciones
+  annotations:
+    samm: annotations/samm_annotations.csv
+    casme2: annotations/casme2_annotations.csv
+
+processing:
+  clahe: true
+  pad_pct: 0.15
+  upsample_before_downsample: false
+  intermediate_size: [256, 256]
+
+features:
+  output_file: features/all_features.csv
+  bins: 16
+  save_per_dataset: false   # si lo pones true, guarda un CSV por dataset
+
+model:
+  output_path: models/svm_model.joblib
+  type: svm
+  training:
+    test_size: 0.2
+    random_state: 42
+    class_weight: balanced
+    use_cross_validation: false
+    cv_folds: 5
+
+inference:
+  roi: rostro_completo
+  buffer_size: 5
+  prob_threshold: 0.0
+
+io:
+  image_extensions: [".jpg", ".png"]
+  rois_save_format: "png"
+
+logging:
+  level: INFO
+  log_dir: logs
+
+label_mapping:
+  casme2:
+    Happiness: "Happiness"
+    Disgust: "Disgust"
+    Surprise: "Surprise"
+    Repression: "Other"
+    Others: "Other"
+  SAMM_v1:
+    Happiness: "Happiness"
+    Surprise: "Surprise"
+    Contempt: "Contempt"
+    Anger: "Anger"
+    Disgust: "Disgust"
+    Fear: "Fear"
+    Sadness: "Sadness"
+    Other: "Other"
