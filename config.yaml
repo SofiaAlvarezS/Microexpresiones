@@ -1,14 +1,18 @@
 # config.yaml - configuración unificada para el pipeline
+
 dataset:
-  # lista de carpetas raíz donde están tus datasets (SAMM, CASME_II, etc.)
-  raw_paths:
+  # Lista de carpetas raíz donde están los datasets (SAMM, CASME2, etc.)
+  videos_path: 
     - data_raw/SAMM_v1
     - data_raw/CASME2
-  # carpeta donde se guardarán los ROIs procesados
+
+  # Carpeta donde se guardarán los ROIs procesados
   rois_path: rois
-  # tamaño final (W, H) para los ROIs que alimentan features/modelo
+
+  # Tamaño final (W, H) para los ROIs que alimentan features/modelo
   roi_size: [128, 128]
-  # archivos de anotaciones
+
+  # Archivos de anotaciones
   annotations:
     samm: annotations/samm_annotations.csv
     casme2: annotations/casme2_annotations.csv
@@ -18,10 +22,13 @@ processing:
   pad_pct: 0.15
   upsample_before_downsample: false
   intermediate_size: [256, 256]
+  window_size: 16      # 👈 añadimos para sliding windows
+  stride: 8           # 👈 añadimos para sliding windows
 
 features:
   output_file: features/all_features.csv
   bins: 16
+  grid: [4, 4]       # 👈 añadimos para HOF
   save_per_dataset: false   # si lo pones true, guarda un CSV por dataset
 
 model:
